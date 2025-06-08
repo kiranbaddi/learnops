@@ -1,0 +1,42 @@
+services:
+  learnops-frontend:
+    image: learnops-frontend:1.0
+    ports:
+      - "3000:3000"
+    networks:
+      - learnops-net
+
+  learnops-app:
+    image: learnops-app:1.0
+    environment:
+      DATABASE_HOST: $DATABASE_HOST
+      DATABASE_USER: $DATABASE_USER
+      DATABASE: $DATABASE
+      DATABASE_PASSWORD: $DATABASE_PASSWORD
+      JWT_SECRET: $JWT_SECRET
+    ports:
+      - "3001:3001"
+    networks:
+      - learnops-net
+
+  learnops-db:
+    image: mysql:latest
+    container_name: learnops
+    ports:
+      - "3306:3306"
+    volumes:
+      - ~/lab/db-learnops:/var/lib/mysql
+    env_file:
+      - ~/lab/db-learnops/.env
+    environment:
+      MYSQL_ROOT_PASSWORD: $DATABASE_PASSWORD
+      MYSQL_USER: $DATABASE_USER
+      MYSQL_PASSWORD: $DATABASE_PASSWORD
+      MYSQL_DATABASE: $DATABASE
+    networks:
+      - learnops-net
+  
+
+networks:
+  learnops-net:
+    driver: bridge
