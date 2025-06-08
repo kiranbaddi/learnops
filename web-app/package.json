@@ -1,0 +1,14 @@
+{
+  "name": "web-app",
+  "version": "1.0.0",
+  "description": "A simple web application with a welcome page featuring buttons for registration and login.",
+  "main": "src/server.js",
+  "scripts": {
+    "start": "node src/server.js"
+  },
+  "dependencies": {
+    "express": "^4.17.1"
+  },
+  "author": "Your Name",
+  "license": "ISC"
+}
